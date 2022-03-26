@@ -1,6 +1,17 @@
 const express = require('express');
+const bodyParser  = require('body-parser');
 const app = express();
 //specify which domains can make requests and which methods are allowed
+
+const mongoose = require('mongoose');
+//specify where to find the schema
+const Student = require('./models/student')
+//connect and display the status 
+mongoose.connect('mongodb://localhost:27017/IT6203', { useNewUrlParser: true,  useUnifiedTopology: true })
+    .then(() => { console.log("connected"); })
+    .catch(() => { console.log("error connecting"); });
+
+
 app.use((req, res, next) => {
     console.log('This line is always called');
     res.setHeader('Access-Control-Allow-Origin', '*'); //can connect from any host
